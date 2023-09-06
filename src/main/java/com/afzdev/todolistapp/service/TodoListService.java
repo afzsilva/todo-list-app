@@ -5,9 +5,9 @@ import com.afzdev.todolistapp.model.TodoList;
 import java.util.UUID;
 
 public interface TodoListService {
-    TodoList createTodoList();
+    TodoList createTodoList(TodoList todoList);
     TodoList getTodoList(UUID id);
     TodoList updateTodoList(UUID id, TodoList todoList);
-    TodoList deleteTodoList(UUID id);
+    void deleteTodoList(UUID id);
 
 }
