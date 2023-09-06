@@ -2,12 +2,11 @@ package com.afzdev.todolistapp.service;
 
 import com.afzdev.todolistapp.model.TodoList;
 import com.afzdev.todolistapp.repository.TodoListRepository;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,6 +15,12 @@ import java.util.UUID;
 public class TodoListServiceImpl implements TodoListService{
 
     private final TodoListRepository repository;
+
+    @Override
+    public List<TodoList> getTodoLists() {
+        return repository.findAll();
+    }
+
     @Override
     public TodoList createTodoList(TodoList todoList) {
         return repository.save(todoList);
@@ -35,6 +40,10 @@ public class TodoListServiceImpl implements TodoListService{
 
     @Override
     public void deleteTodoList(UUID id) {
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        }catch (Exception e){
+            throw new RuntimeException("Erro ao tentar deletar "+id+" "+e.getMessage());
+        }
     }
 }
