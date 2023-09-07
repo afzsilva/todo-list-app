@@ -12,13 +12,13 @@ import java.util.List;
 import java.util.UUID;
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/todolist/")
+@RequestMapping("api/v1/todo-list")
 public class TodoListController {
 
     private final TodoListService service;
 
     @GetMapping
-    ResponseEntity<List<TodoList>> getTodoLists(@PathVariable("id") UUID id){
+    ResponseEntity<List<TodoList>> getTodoLists(){
         return ResponseEntity.ok(service.getTodoLists());
     }
     @PostMapping
